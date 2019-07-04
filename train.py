@@ -129,8 +129,8 @@ if __name__ == "__main__":
     epochs = args.epochs
 
     print("User configuration")
-    print("250*250 sample per image:",n_sample)
-    print("steps per epoch:",steps_per_epoch)
-    print("epochs:",epochs)
+    print("250*250 sample per image:", n_sample)
+    print("steps per epoch:", steps_per_epoch)
+    print("epochs:", epochs)
 
     main(n_sample=n_sample, steps_per_epoch=steps_per_epoch, epochs=epochs)
