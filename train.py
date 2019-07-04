@@ -69,19 +69,6 @@ def commandline_input():
     return args
 
 
-def adjustData(img, mask, flag_multi_class, num_class):
-    if (flag_multi_class):
-        print("Deleted")
-
-    elif(np.max(img) > 1):
-        img = img / 255
-        mask = mask / 255
-        mask[mask > 0.5] = 1
-        mask[mask <= 0.5] = 0
-
-    return (img, mask)
-
-
 def trainGenerator(batch_size, train_path, image_folder, mask_folder,
                    aug_dict, image_color_mode="grayscale",
                    mask_color_mode="grayscale", image_save_prefix="image",
@@ -116,9 +103,21 @@ def trainGenerator(batch_size, train_path, image_folder, mask_folder,
         seed=seed)
 
     train_generator = zip(image_generator, mask_generator)
-    for (img, mask) in train_generator:
-        img, mask = adjustData(img, mask, flag_multi_class, num_class)
-        yield (img, mask)
+    for images, masks in train_generator:
+        #: 任意の処理を挟むことが可能
+        for i in range(images.shape[0]):
+            image = images[i, :, :, :]
+            image = image / 255
+            images[i, :, :, :] = image
+
+        for i in range(masks.shape[0]):
+            mask = masks[i, :, :, :]
+            mask = mask / 255
+            mask[mask > 0.5] = 1
+            mask[mask <= 0.5] = 0
+            masks[i, :, :, :] = mask
+
+        yield (images, masks)
 
 
 if __name__ == "__main__":
