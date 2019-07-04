@@ -17,7 +17,6 @@ from keras.preprocessing.image import ImageDataGenerator
 warnings.filterwarnings('ignore')
 
 
-
 def unet(pretrained_weights=None, input_size=(256, 256, 1)):
     inputs = Input(input_size)
     conv1 = Conv2D(64, 3, activation='relu', padding='same',

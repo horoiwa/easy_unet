@@ -73,4 +73,3 @@ def sampling256(image, mask):
 
 if __name__ == '__main__':
     prep_data(n_sample=10)
-
