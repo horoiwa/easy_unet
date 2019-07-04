@@ -118,7 +118,7 @@ def inference(image):
     return predicted_image
 
 
-def reincarnation(images_pred, num_w,num_h):
+def reincarnation(images_pred, num_w, num_h):
     images_pred = [pred[0, :, :, 0] for pred in images_pred]
     lines = []
 
@@ -128,8 +128,8 @@ def reincarnation(images_pred, num_w,num_h):
 
     image = np.vstack(lines)
     image = image*255
-    #image[image<150] = 0
-    #image[image>=150] = 255
+    # image[image<150] = 0
+    # image[image>=150] = 255
 
     predicted_image = Image.fromarray(np.uint8(image))
     return predicted_image
